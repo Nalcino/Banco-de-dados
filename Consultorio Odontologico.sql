@@ -79,4 +79,43 @@ VALUES
 ('Av. Tito, 50', '2024-12-30 15:00:00', 'Consulta de emergência, dor de dente');
 
 
+/* CRIAÇÃO DE COLUNA */
+ALTER TABLE tbl_consulta ADD COLUMN fk_id_paciente INT;
+/* CRIAÇÃO DE COLUNA */
+ALTER TABLE tbl_consulta ADD COLUMN fk_id_dentista INT;
+
+/* ADICIONANDO CHAVE ESTRANGEIRA */
+ALTER TABLE tbl_consulta ADD CONSTRAINT FOREIGN KEY (fk_id_paciente) REFERENCES tbl_paciente (pk_id_paciente);
+/* ADICIONANDO CHAVE ESTRANGEIRA */
+ALTER TABLE tbl_consulta ADD CONSTRAINT foreign key (fk_id_dentista) REFERENCES tbl_dentista (id_dentista);
+
+/* SELECT COM INNER JOIN*/
+SELECT 
+    tbl_consulta.local_consulta,
+    tbl_consulta.data_consulta,
+    tbl_consulta.descricao_consulta_consulta,
+    tbl_paciente.nome_paciente,
+    tbl_dentista.nome_dentista
+    
+FROM tbl_consulta INNER JOIN tbl_paciente
+ON tbl_consulta.fk_id_paciente = tbl_paciente.pk_id_paciente
+INNER JOIN 
+tbl_dentista ON tbl_consulta.fk_id_dentista = tbl_dentista.id_dentista;
+
+/* ADICIONANDO ID PRA CHAVE ESTRANGEIRA*/
+INSERT INTO tbl_consulta (local_consulta, data_consulta, descricao_consulta_consulta, fk_id_paciente, fk_id_dentista)
+VALUES
+('Av. Tito, 50', '2024-10-29 09:00:00', 'Limpeza bucal, obturação', 1, 2),
+('Av. Tito, 50', '2024-11-05 10:30:00', 'Consulta de rotina, avaliação', 3, 1),
+('Av. Tito, 50', '2024-11-12 14:00:00', 'Tratamento de canal', 2, 3);
+
+SELECT*FROM tbl_consulta;
+
+UPDATE tbl_consulta SET descricao_consulta_consulta ='canal e clareamento' WHERE id_consulta =1;
+
+SELECT*FROM tbl_paciente;
+
+/*DELETE DE INSERT */
+DELETE FROM tbl_paciente WHERE pk_id_paciente =2;
+DELETE FROM tbl_consulta WHERE fk_id_paciente =2;
 

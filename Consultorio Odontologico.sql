@@ -95,6 +95,7 @@ SELECT
     tbl_consulta.data_consulta,
     tbl_consulta.descricao_consulta_consulta,
     tbl_paciente.nome_paciente,
+    tbl_paciente.cpf_paciente,
     tbl_dentista.nome_dentista
     
 FROM tbl_consulta INNER JOIN tbl_paciente
@@ -118,4 +119,8 @@ SELECT*FROM tbl_paciente;
 /*DELETE DE INSERT */
 DELETE FROM tbl_paciente WHERE pk_id_paciente =2;
 DELETE FROM tbl_consulta WHERE fk_id_paciente =2;
+
+
+
+
 
